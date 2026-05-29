@@ -2,7 +2,8 @@
 
 > 스터디 1회차 · 2026-05-30 · 발표자 kodayoung \
 > 대상: IT 업계 종사자 / 개발자 \
-> 관점: Backend / 시스템 운영 / 개발 워크플로우 변화
+> 관점: Backend / 시스템 운영 / 개발 워크플로우 변화 \
+> 발표자료: [Google Slides](https://docs.google.com/presentation/d/1iAOIXCIxynGrCx8OpyCd12TMvEoqS8JQQ_8n3t05Dsk/edit?usp=sharing)
 
 
 ## TL;DR

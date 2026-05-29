@@ -23,6 +23,6 @@
 
 ## 스터디 진행 아카이빙
 
-| 회차 | 날짜 | 주제 | 진행자 | 발표 자료 | 회고/기록 |
-| --- | --- | --- | --- | --- | --- |
-| 1 | 2026-05-30 | AI 기술 등장 배경과 구조적 변화 분석 | kodayoung | [ai-history.md](docs/20260530/ai-history.md) | - |
+| 회차 | 날짜 | 주제 | 진행자 | 발표 자료 | 발표자료 | 회고/기록 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 2026-05-30 | AI 기술 등장 배경과 구조적 변화 분석 | kodayoung | [ai-history.md](docs/20260530/ai-history.md) | [Google Slides](https://docs.google.com/presentation/d/1iAOIXCIxynGrCx8OpyCd12TMvEoqS8JQQ_8n3t05Dsk/edit?usp=sharing) | - |
