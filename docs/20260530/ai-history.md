@@ -16,20 +16,12 @@
 
 ## 목차
 
-- [AI 기술 등장 배경과 구조적 변화 분석](#ai-기술-등장-배경과-구조적-변화-분석)
-  - [TL;DR](#tldr)
-  - [목차](#목차)
-  - [1️⃣ 왜 지금 AI가 폭발했는가](#1️⃣-왜-지금-ai가-폭발했는가)
-  - [2️⃣ AI 역사 흐름](#2️⃣-ai-역사-흐름)
-    - [시대별 비교](#시대별-비교)
-  - [3️⃣ 현재 AI 산업 브리핑](#3️⃣-현재-ai-산업-브리핑)
-    - [진영별 방향성](#진영별-방향성)
-  - [4️⃣ AI-Native 기술의 등장](#4️⃣-ai-native-기술의-등장)
-    - [실행 환경의 핵심 구성](#실행-환경의-핵심-구성)
-  - [5️⃣ 미래와 개발자의 역할](#5️⃣-미래와-개발자의-역할)
-    - [현실에서 일어나는 문제들](#현실에서-일어나는-문제들)
-    - [사라지는 일 vs 늘어나는 일](#사라지는-일-vs-늘어나는-일)
-  - [References](#references)
+- [1️⃣ 왜 지금 AI가 폭발했는가](#1️⃣-왜-지금-ai가-폭발했는가)
+- [2️⃣ AI 역사 흐름](#2️⃣-ai-역사-흐름)
+- [3️⃣ 현재 AI 산업 브리핑](#3️⃣-현재-ai-산업-브리핑)
+- [4️⃣ AI-Native 기술의 등장](#4️⃣-ai-native-기술의-등장)
+- [5️⃣ 미래와 개발자의 역할](#5️⃣-미래와-개발자의-역할)
+- [References](#references)
 
 
 
@@ -62,27 +54,27 @@ flowchart LR
   D --> E[GPT 시대<br/>2020~]
   E --> F[RAG / Agent<br/>2023~]
 
-  A -. 룰 폭발 .-> B
-  B -. 피처 한계 .-> C
-  C -. 순차 처리 .-> D
-  D -. 작은 모델 한계 .-> E
-  E -. 최신성·액션 부재 .-> F
+  A -. 데이터로 학습 .-> B
+  B -. 피처 자동 추출 .-> C
+  C -. 병렬 처리·장거리 문맥 .-> D
+  D -. 범용 능력 확보 .-> E
+  E -. 외부 지식·도구 활용 .-> F
 ```
 
 ### 시대별 비교
 
-| 시대 | Why (이전 한계) | What (변화) | 살아남은 핵심 기술 | 주요 이슈 |
-| --- | --- | --- | --- | --- |
-| **규칙 기반** | 인간 패턴을 코드로 자동화 | If-Then 룰엔진, Expert System | 비즈니스 룰 엔진, 정책 엔진 (지금도 사기탐지·컴플라이언스에서 사용) | 룰 폭발, 유지보수 불가 |
-| **머신러닝** | 룰을 사람이 다 못 씀 → 데이터로 학습 | 통계 학습 (SVM, RF, GBM) | scikit-learn, feature engineering, 추천 시스템 | 피처 엔지니어링 비용, 도메인 의존 |
-| **딥러닝** | 피처를 사람이 못 만듦 → 표현 학습 | CNN/RNN, end-to-end 학습 | GPU 학습, embedding | 데이터 의존, 해석성 부족 |
-| **Transformer** | RNN의 장거리 의존성·병렬화 한계 | Self-Attention 기반 병렬 학습 | self-attention, scaling laws, encoder/decoder | 학습 비용 폭발 |
-| **GPT 시대** | 작은 모델로는 범용성 불가 → scale | 대규모 사전학습 + 프롬프트 | LLM, few-shot, instruction tuning, RLHF | 환각, 토큰 비용, 안전성 |
-| **RAG / Agent** | LLM은 최신·사실·실행 불가 | 외부 컨텍스트 주입 + Tool 실행 | Vector DB, Tool Calling, Memory, Orchestration | 검증, 신뢰성, 보안 |
+| 시대 | Why (이전 한계) | What (변화) | 주요 이슈 |
+| --- | --- | --- | --- |
+| **규칙 기반** | 사람의 판단 규칙을 if/else로 코드화 | If-Then 룰엔진, Expert System | 케이스가 늘수록 룰 수가 폭증해 유지 불가 |
+| **머신러닝** | 사람이 룰을 다 못 씀 → 데이터로 학습 | 통계 학습 (SVM, RF, GBM) | 사람이 입력 변수를 일일이 설계하는 방식의 한계 |
+| **딥러닝** | 사람이 의미 있는 특성을 못 만듦 → 표현 학습 | CNN/RNN, end-to-end 학습 | 데이터 의존, 해석성 부족 |
+| **Transformer** | RNN의 장거리 의존성·병렬화 한계 | Self-Attention 기반 병렬 학습 | 학습 비용 폭발 |
+| **GPT 시대** | 작은 모델로는 범용성 불가 → 대규모 사전학습 | 대규모 사전학습 + 프롬프트 | 환각, 토큰 비용, 안전성 |
+| **RAG / Agent** | LLM은 최신 정보 없음 / 환각 / 외부 액션 불가 | 외부 컨텍스트 주입 + Tool 실행 | 검증, 신뢰성, 보안 |
 
 각 전환점에는 공통 패턴이 있다.
 
-1. 이전 방식이 **scale에 의해 무너졌다**.
+1. 이전 방식이 **데이터·문제 규모가 커지면서 더 이상 작동하지 않게 되었다**.
 2. 다음 방식은 **새로운 종류의 비용(GPU, 데이터, 인프라, 운영)** 을 요구했다.
 3. 살아남은 기술은 사라지지 않고 **현재 스택의 하부 레이어로 흡수되었다.** (룰엔진은 여전히 정책 검증에, ML은 여전히 추천에 쓰인다.)
 
@@ -92,33 +84,13 @@ flowchart LR
 
 **핵심 메시지: 현재 AI 시장은 모델 성능 경쟁이 아니라, "미래 컴퓨팅 인터페이스를 누가 장악할 것인가" 의 경쟁이다.**
 
-```mermaid
-mindmap
-  root((AI 시장 경쟁))
-    모델 전쟁
-      OpenAI GPT
-      Anthropic Claude
-      Google Gemini
-      Meta Llama
-      중국계 Qwen/DeepSeek
-    에이전트 전쟁
-      Claude Code
-      GitHub Copilot Agent
-      Devin
-      Operator
-    플랫폼 전쟁
-      ChatGPT
-      Gemini in Workspace
-      Copilot in Windows
-    인프라 전쟁
-      NVIDIA GPU
-      Google TPU
-      자체 칩(AWS Trainium 등)
-    오픈소스 전쟁
-      Llama 계열
-      Qwen 계열
-      DeepSeek
-```
+| 전쟁 | 핵심 질문 | 대표 진영 |
+| --- | --- | --- |
+| 모델 | 누가 더 똑똑한가 | OpenAI / Anthropic / Google / Meta / 중국계 |
+| 에이전트 | 누가 더 '일'을 대신하나 | Claude Code / GitHub Copilot Agent / Devin / Operator |
+| 플랫폼 | OS/검색/IDE 누가 장악 | ChatGPT / Gemini in Workspace / Copilot in Windows |
+| 인프라 | GPU/전력/DC 확보 | NVIDIA GPU / Google TPU / AWS Trainium 등 |
+| 오픈소스 | 폐쇄형 vs 공개형 | Llama / Qwen / DeepSeek |
 
 ### 진영별 방향성
 
@@ -174,14 +146,11 @@ flowchart TB
 
 **핵심 메시지: 개발자의 일은 "직접 구현"에서 "AI와 협업 가능한 시스템 설계"로 이동한다. 사라지는 일은 보일러플레이트이고, 늘어나는 일은 검증과 의사결정이다.**
 
-```mermaid
-flowchart LR
-  Past["과거<br/>직접 구현 중심<br/>- 코드 작성<br/>- 단순 디버깅<br/>- 보일러플레이트"]
-  Now["현재<br/>설계 + 검증 중심<br/>- AI 출력 리뷰<br/>- 프롬프트/컨텍스트 설계<br/>- 안정성 보강"]
-  Future["미래<br/>시스템 Orchestration<br/>- AI/사람/시스템 경계 설계<br/>- 책임·권한·검증 구조<br/>- 운영 가능한 자동화"]
-
-  Past --> Now --> Future
-```
+| 시점 | 핵심 역할 | 대표 활동 |
+| --- | --- | --- |
+| 과거 | 직접 구현 | 코드 작성 / 단순 디버깅 / 보일러플레이트 |
+| 현재 | 설계 + 검증 | AI 출력 리뷰 / 프롬프트·컨텍스트 설계 / 안정성 보강 |
+| 미래 | 시스템 Orchestration | AI·사람·시스템 경계 설계 / 책임·권한·검증 구조 / 운영 가능한 자동화 |
 
 ### 현실에서 일어나는 문제들
 
