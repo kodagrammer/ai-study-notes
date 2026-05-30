@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Evolution Dashboard 2023-2026</title>
+<style>
+:root{
+  --bg:#0b1020;--panel:#121a2f;--panel2:#17223d;--text:#e8eefc;--muted:#9fb0d0;
+  --line:#2a385c;--blue:#6ea8fe;--green:#69db7c;--yellow:#ffd43b;--red:#ff8787;--purple:#b197fc;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(135deg,#070b16,#101a33);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.55}
+header{padding:40px 48px;border-bottom:1px solid var(--line);background:#0b1020}
+h1{margin:0 0 10px;font-size:34px}
+h2{margin:34px 0 16px;font-size:24px}
+h3{margin:18px 0 10px;font-size:18px;color:#dbe7ff}
+p{color:var(--muted)}
+main{padding:28px 48px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.card{background:rgba(18,26,47,.96);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 18px 40px rgba(0,0,0,.25)}
+.span4{grid-column:span 4}.span6{grid-column:span 6}.span8{grid-column:span 8}.span12{grid-column:span 12}
+.metric{font-size:30px;font-weight:800;color:white}
+.badge{display:inline-block;padding:4px 9px;border:1px solid var(--line);border-radius:999px;color:#c7d7ff;background:#10182b;font-size:12px}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:10px;vertical-align:top}
+th{text-align:left;color:#c9d8ff;background:#10182b}
+.bar{height:10px;background:#273557;border-radius:999px;overflow:hidden;min-width:80px}
+.fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--purple))}
+.fill.green{background:linear-gradient(90deg,var(--green),#20c997)}
+.fill.yellow{background:linear-gradient(90deg,var(--yellow),#ffa94d)}
+.fill.red{background:linear-gradient(90deg,var(--red),#f03e3e)}
+.timeline{display:grid;grid-template-columns:120px 1fr;gap:12px}
+.month{color:#8fb3ff;font-weight:700}
+.issue{padding:10px 12px;background:#10182b;border:1px solid var(--line);border-radius:12px;margin-bottom:8px}
+.kv{display:grid;grid-template-columns:180px 1fr;gap:8px}
+small,.source{color:#8ea0c0;font-size:12px}
+code{color:#9cdcfe}
+@media(max-width:900px){main,header{padding:22px}.span4,.span6,.span8{grid-column:span 12}.timeline{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>AI Evolution Dashboard · 2023–2026.05</h1>
+  <p>백엔드/소프트웨어 엔지니어 관점: 모델 품질보다 운영 비용, 지연시간, 데이터 정합성, 처리량, 보안 리스크 중심으로 정리.</p>
+  <span class="badge">Scope: released models / papers / tools only</span>
+  <span class="badge">No CDN / Pure HTML + CSS</span>
+</header>
+
+<main>
+<section class="grid">
+  <div class="card span4"><div class="metric">2023</div><p>GPT-4 이후 LLM API 상용화, RAG/VectorDB 적용 확산</p></div>
+  <div class="card span4"><div class="metric">2024</div><p>멀티모달, 긴 컨텍스트, reasoning-preview, small model 경쟁</p></div>
+  <div class="card span4"><div class="metric">2025–2026</div><p>Agentic workflow, SLM routing, on-device/offload, 비용 최적화가 주류 과제</p></div>
+</section>
+
+<h2>1. Provider 점유율 변화</h2>
+<div class="card">
+  <p><b>주의:</b> 2023–2025는 Menlo Ventures의 enterprise LLM spend 추정치, 2026은 Ramp 기반 business adoption 지표다. 동일 지표가 아니므로 절대 비교보다 방향성 판단용이다.</p>
+  <table>
+    <tr><th>Year</th><th>OpenAI</th><th>Anthropic</th><th>Google</th><th>Backend 해석</th><th>Source</th></tr>
+    <tr>
+      <td>2023</td>
+      <td>50%<div class="bar"><div class="fill" style="width:50%"></div></div></td>
+      <td>12%<div class="bar"><div class="fill green" style="width:12%"></div></div></td>
+      <td>7%<div class="bar"><div class="fill yellow" style="width:7%"></div></div></td>
+      <td>초기 API 통합은 OpenAI 중심. RAG, prompt pipeline, embeddings가 빠르게 붙음.</td>
+      <td>Menlo VC 2025 GenAI Enterprise</td>
+    </tr>
+    <tr>
+      <td>2024</td>
+      <td>34%<div class="bar"><div class="fill" style="width:34%"></div></div></td>
+      <td>24%<div class="bar"><div class="fill green" style="width:24%"></div></div></td>
+      <td>11%<div class="bar"><div class="fill yellow" style="width:11%"></div></div></td>
+      <td>Claude/Gemini 도입 증가. 모델 추상화, fallback, vendor lock-in 회피가 중요해짐.</td>
+      <td>Menlo VC 2025 GenAI Enterprise</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>27%<div class="bar"><div class="fill" style="width:27%"></div></div></td>
+      <td>40%<div class="bar"><div class="fill green" style="width:40%"></div></div></td>
+      <td>21%<div class="bar"><div class="fill yellow" style="width:21%"></div></div></td>
+      <td>엔터프라이즈 코딩/문서/agent 업무에서 Anthropic 비중 확대. 비용·정확도·툴 사용 안정성이 평가축.</td>
+      <td>Menlo VC 2025 GenAI Enterprise</td>
+    </tr>
+    <tr>
+      <td>2026.03–05</td>
+      <td>약 32.3% adoption<div class="bar"><div class="fill" style="width:32.3%"></div></div></td>
+      <td>약 34.4% adoption<div class="bar"><div class="fill green" style="width:34.4%"></div></div></td>
+      <td>약 4.7% adoption<div class="bar"><div class="fill yellow" style="width:4.7%"></div></div></td>
+      <td>기업별 “결제/도입” 지표에서는 Claude가 OpenAI를 추월했다는 관측. 단, spend와 adoption은 다름.</td>
+      <td>Ramp AI Index / MindStudio summary</td>
+    </tr>
+  </table>
+</div>
+
+<h2>2. Open-source / Tool 생태계 지표</h2>
+<div class="grid">
+  <div class="card span6">
+    <h3>Hugging Face 성장</h3>
+    <table>
+      <tr><th>지표</th><th>2025 기준</th><th>해석</th></tr>
+      <tr><td>Users</td><td>13M</td><td>모델 소비/배포가 API 벤더 중심에서 OSS/자체 호스팅으로 분산</td></tr>
+      <tr><td>Public models</td><td>2M+</td><td>모델 선택 폭 증가 → routing, benchmark, eval 자동화 필요</td></tr>
+      <tr><td>Public datasets</td><td>500K+</td><td>fine-tuning, eval set, synthetic data 관리 중요</td></tr>
+    </table>
+    <p class="source">Source: Hugging Face, State of Open Source on HF Spring 2026</p>
+  </div>
+  <div class="card span6">
+    <h3>Tool Layer 변화</h3>
+    <table>
+      <tr><th>Tool</th><th>역할</th><th>Backend 관점</th></tr>
+      <tr><td>LangChain / LangGraph</td><td>Agent orchestration, tool calling, durable execution</td><td>복잡한 흐름은 state machine처럼 다뤄야 함</td></tr>
+      <tr><td>LlamaIndex</td><td>문서 ingestion, indexing, RAG pipeline</td><td>문서 기반 업무 자동화에서 ETL 품질이 답변 품질을 좌우</td></tr>
+      <tr><td>VectorDB</td><td>embedding similarity search</td><td>검색 recall/latency/cost/권한 필터링이 운영 핵심</td></tr>
+      <tr><td>OpenRouter류 Gateway</td><td>multi-model routing / fallback</td><td>벤더 장애·가격 변동·성능 편차 대응</td></tr>
+    </table>
+  </div>
+</div>
+
+<h2>3. 월별 Hot Issue Timeline</h2>
+<div class="card timeline">
+  <div class="month">2023-03</div><div class="issue">GPT-4 공개. 멀티모달 입력과 고성능 추론이 API 제품화의 기준점이 됨.</div>
+  <div class="month">2023-06</div><div class="issue">LlamaIndex가 private data + LLM 애플리케이션 프레임워크로 부상. RAG 구현 표준화 시작.</div>
+  <div class="month">2023-07</div><div class="issue">Meta Llama 2 공개. 오픈 모델 기반 자체 호스팅/튜닝 선택지가 확대.</div>
+  <div class="month">2023-09</div><div class="issue">Mistral 7B 공개. 작은 모델의 비용 대비 성능 논의 확대.</div>
+  <div class="month">2023-11</div><div class="issue">OpenAI DevDay 이후 function calling, assistant API, tool use 흐름이 개발 표준으로 확산.</div>
+  <div class="month">2023-12</div><div class="issue">Google Gemini 1.0 공개. Gemini Pro API, multimodal 경쟁 본격화.</div>
+
+  <div class="month">2024-02</div><div class="issue">Gemini 1.5 발표. MoE와 long-context가 RAG 대체/보완 논쟁을 촉발.</div>
+  <div class="month">2024-03</div><div class="issue">Claude 3 family 공개. Opus/Sonnet/Haiku로 cost-latency-quality tiering이 명확해짐.</div>
+  <div class="month">2024-04</div><div class="issue">Llama 3 공개. 공개 가중치 모델의 코딩/추론 성능 경쟁 심화.</div>
+  <div class="month">2024-05</div><div class="issue">GPT-4o 공개. text/audio/vision 실시간 멀티모달 처리와 낮은 latency가 핵심 이슈.</div>
+  <div class="month">2024-07</div><div class="issue">GPT-4o mini 공개. SLM/저비용 모델을 router에 넣는 비용 최적화 패턴 확산.</div>
+  <div class="month">2024-09</div><div class="issue">OpenAI o1-preview 공개. 더 긴 reasoning time을 비용으로 지불하는 모델 계층 등장.</div>
+
+  <div class="month">2025-01</div><div class="issue">DeepSeek-R1 공개. RL 기반 reasoning과 distillation 모델이 비용 구조를 흔듦.</div>
+  <div class="month">2025-02</div><div class="issue">Claude 3.7 Sonnet 공개. extended thinking과 일반 응답을 결합한 hybrid reasoning 부상.</div>
+  <div class="month">2025-03</div><div class="issue">Gemini 2.5 Pro experimental 공개. thinking mode와 coding/reasoning benchmark 경쟁.</div>
+  <div class="month">2025-04</div><div class="issue">OpenAI o3/o4-mini, Meta Llama 4 공개. reasoning + multimodal + MoE 구조가 주류화.</div>
+  <div class="month">2025-05</div><div class="issue">Claude Opus 4 공개. agentic coding과 장시간 작업 안정성이 경쟁축으로 이동.</div>
+  <div class="month">2025-12</div><div class="issue">OpenRouter 100T token usage study, Menlo enterprise spend report. 실제 사용 데이터 기반 모델 선택 논의 확대.</div>
+
+  <div class="month">2026-01</div><div class="issue">Hugging Face open ecosystem 2M+ models. 모델 과잉 시대 → eval, governance, registry 필요.</div>
+  <div class="month">2026-03</div><div class="issue">Ramp AI Index에서 Anthropic adoption 급증 관측. 기업 도입은 단일 벤더보다 task-fit 중심으로 이동.</div>
+  <div class="month">2026-04</div><div class="issue">GPT-5.5 공개. 복잡한 real-world work, coding, tool use, spreadsheet/document 작업 강화.</div>
+  <div class="month">2026-05</div><div class="issue">Claude Mythos / Project Glasswing. AI의 방어적 보안 활용과 공격 역량 증폭 리스크가 동시에 부상.</div>
+</div>
+
+<h2>4. 기술 원리 / 해결 문제 / 트레이드오프 Matrix</h2>
+<div class="card">
+<table>
+<tr><th>기술</th><th>원리</th><th>해결 문제</th><th>Backend Risk</th><th>적용 기준</th></tr>
+<tr>
+<td>LLM API</td>
+<td>대규모 사전학습 모델에 prompt를 전달해 token 생성</td>
+<td>자연어 이해, 코드 생성, 문서 요약, 분류 자동화</td>
+<td>비결정성, hallucination, vendor lock-in, token cost</td>
+<td>업무 보조, 초안 생성, 비정형 텍스트 처리</td>
+</tr>
+<tr>
+<td>RAG</td>
+<td>질문 → embedding 검색 → 관련 문서 context 주입 → 생성</td>
+<td>최신/사내 지식 반영, 출처 기반 답변, fine-tuning 비용 절감</td>
+<td>chunking 실패, stale index, 권한 필터 누락, retrieval latency</td>
+<td>사내 문서 QA, 정책 검색, 고객지원, 기술문서 탐색</td>
+</tr>
+<tr>
+<td>VectorDB</td>
+<td>고차원 embedding에 대한 approximate nearest neighbor 검색</td>
+<td>키워드 검색이 약한 의미 기반 탐색</td>
+<td>index rebuild 비용, metadata filter 성능, multi-tenant isolation</td>
+<td>문서량이 많고 의미 검색이 필요한 경우</td>
+</tr>
+<tr>
+<td>Function Calling / Tool Use</td>
+<td>모델이 JSON schema에 맞춰 외부 함수 호출 의도를 생성</td>
+<td>DB 조회, API 호출, 계산, workflow 실행 연결</td>
+<td>권한 상승, prompt injection, idempotency 실패, side effect 통제</td>
+<td>읽기 작업부터 시작, 쓰기 작업은 human approval 권장</td>
+</tr>
+<tr>
+<td>Agentic Workflow</td>
+<td>계획 → 도구 호출 → 관찰 → 재시도 → 결과 생성 loop</td>
+<td>단발성 prompt로 어려운 다단계 업무 자동화</td>
+<td>무한 루프, 비용 폭증, 잘못된 tool chaining, audit 어려움</td>
+<td>명확한 종료조건, budget, sandbox, trace 저장이 있을 때</td>
+</tr>
+<tr>
+<td>SLM Routing</td>
+<td>작은 모델로 분류/초안/간단 작업 처리, 어려운 작업만 frontier model로 escalte</td>
+<td>비용과 latency 절감</td>
+<td>잘못된 triage, 품질 편차, eval set 부족</td>
+<td>대량 요청, 반복 업무, 난이도 분포가 넓은 서비스</td>
+</tr>
+<tr>
+<td>On-Device AI</td>
+<td>모델 일부/전체를 클라이언트 장치에서 실행</td>
+<td>개인정보 보호, 오프라인 처리, 서버 비용 절감</td>
+<td>기기별 성능 편차, 모델 업데이트 어려움, 보안 검증 한계</td>
+<td>민감 데이터 전처리, 요약, 키보드/음성/이미지 보조</td>
+</tr>
+<tr>
+<td>Harness / Eval Engineering</td>
+<td>프롬프트, 모델, retrieval, tool 결과를 fixture와 metric으로 검증</td>
+<td>환각 감소, 회귀 테스트, 모델 교체 안정성 확보</td>
+<td>테스트셋 오염, metric과 실제 품질 불일치</td>
+<td>운영 전 필수. 특히 금융/정산/권한/보안 도메인</td>
+</tr>
+</table>
+</div>
+
+<h2>5. Backend 적용 판단 기준</h2>
+<div class="grid">
+  <div class="card span6">
+    <h3>적용해도 되는 경우</h3>
+    <ul>
+      <li>정답이 아니라 <b>후보/초안/분류</b>가 필요한 경우</li>
+      <li>결과를 검증할 rule, schema, human approval이 있는 경우</li>
+      <li>실패해도 rollback 가능한 읽기 중심 workflow</li>
+      <li>모델 교체를 대비한 adapter, gateway, eval set이 있는 경우</li>
+    </ul>
+  </div>
+  <div class="card span6">
+    <h3>보류해야 하는 경우</h3>
+    <ul>
+      <li>법적/금전적 side effect를 자동 실행해야 하는 경우</li>
+      <li>권한별 데이터 격리가 retrieval 단계에서 보장되지 않는 경우</li>
+      <li>latency SLO가 짧고 cold start/API dependency가 큰 경우</li>
+      <li>관측성 없이 agent가 외부 tool을 연쇄 호출하는 경우</li>
+    </ul>
+  </div>
+</div>
+
+<h2>6. 2026 이후 전망</h2>
+<div class="card">
+  <div class="kv"><b>Model</b><span>단일 최고 모델보다 task-specific routing, small/frontier hybrid, reasoning budget 제어가 중요해진다.</span></div>
+  <div class="kv"><b>Architecture</b><span>LLM은 서비스 내부 모듈이 아니라 외부 불확실성을 가진 dependency로 취급해야 한다.</span></div>
+  <div class="kv"><b>Security</b><span>Prompt injection, tool abuse, data exfiltration, model supply chain 검증이 표준 보안 항목이 된다.</span></div>
+  <div class="kv"><b>Cost</b><span>Cache, batch, SLM triage, embedding 재사용, context pruning, async job queue가 비용 최적화 핵심이다.</span></div>
+  <div class="kv"><b>Backend Role</b><span>백엔드 엔지니어의 역할은 “AI 호출”이 아니라 workflow boundary, data contract, observability, rollback 설계다.</span></div>
+</div>
+
+<h2>7. Sources</h2>
+<div class="card">
+  <ul>
+    <li>OpenAI GPT-4: https://openai.com/index/gpt-4-research/</li>
+    <li>OpenAI GPT-4o: https://openai.com/index/hello-gpt-4o/</li>
+    <li>OpenAI o1: https://openai.com/o1/</li>
+    <li>OpenAI o3/o4-mini: https://openai.com/index/introducing-o3-and-o4-mini/</li>
+    <li>OpenAI GPT-5.5: https://openai.com/index/introducing-gpt-5-5/</li>
+    <li>Anthropic Claude 3: https://www.anthropic.com/news/claude-3-family</li>
+    <li>Anthropic Claude Opus 4.1/4.7: https://www.anthropic.com/claude/opus</li>
+    <li>Google Gemini 1.0: https://blog.google/innovation-and-ai/technology/ai/google-gemini-ai/</li>
+    <li>Google Gemini 1.5: https://blog.google/innovation-and-ai/products/google-gemini-next-generation-model-february-2024/</li>
+    <li>Google Gemini 2.5: https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-model-thinking-updates-march-2025/</li>
+    <li>Meta Llama 3: https://ai.meta.com/blog/meta-llama-3/</li>
+    <li>Meta Llama 4: https://ai.meta.com/blog/llama-4-multimodal-intelligence/</li>
+    <li>DeepSeek-R1 paper: https://arxiv.org/abs/2501.12948</li>
+    <li>RAG paper: https://arxiv.org/abs/2005.11401</li>
+    <li>LangChain: https://github.com/langchain-ai/langchain</li>
+    <li>LangGraph: https://docs.langchain.com/oss/python/langgraph/overview</li>
+    <li>LlamaIndex: https://www.llamaindex.ai/blog/building-the-data-framework-for-llms-bca068e89e0e</li>
+    <li>Hugging Face State of Open Source 2026: https://huggingface.co/blog/huggingface/state-of-os-hf-spring-2026</li>
+    <li>Menlo Ventures 2025 Enterprise GenAI: https://menlovc.com/perspective/2025-the-state-of-generative-ai-in-the-enterprise/</li>
+    <li>Ramp AI Index March 2026: https://ramp.com/leading-indicators/ai-index-march-2026</li>
+    <li>OpenRouter State of AI 2025: https://openrouter.ai/state-of-ai</li>
+  </ul>
+</div>
+
+</main>
+</body>
+</html>
